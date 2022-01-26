@@ -3,6 +3,8 @@ package pkg
 import (
 	"io/ioutil"
 	"os"
+	"os/exec"
+	"path/filepath"
 	"strings"
 )
 
@@ -95,4 +97,12 @@ func ParseGitConflictsCode(code string) (*ConflictsResult, error) {
 		ret.ConflictFileB = &ConflictFile{Name: nameB, Data: strings.Join(codesB, "\n")}
 	}
 	return ret, nil
+}
+
+func MarkingConflictResolved(f string) error {
+
+	cmd := exec.Command("git", "add", f)
+	cmd.Dir = filepath.Dir(f)
+	err := cmd.Run()
+	return err
 }

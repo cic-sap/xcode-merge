@@ -33,6 +33,7 @@ func DoMergePackage(packageFile string) error {
 	}
 	log.Debug().Msgf("file:IsConflicts:%v", result.IsConflicts)
 	if !result.IsConflicts {
+		_ = MarkingConflictResolved(packageFile)
 		return nil
 	}
 
@@ -75,5 +76,10 @@ func DoMergePackage(packageFile string) error {
 		return err
 	}
 
+	// Marking conflict resolved
+	err = MarkingConflictResolved(packageFile)
+	if err != nil {
+		return err
+	}
 	return nil
 }
