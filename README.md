@@ -76,3 +76,7 @@ merge result:
   "version": 1
 }
 ```
+
+demo project
+
+https://github.com/cic-sap/demo-conflicts
